@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!-- 扫描注解，这个是用来扫描springmvc控制器的bean。-->
+    <!-- 注意：这个一定要写到springmvc的xml中，这样才会把创建的bean放到springmvc的容器中。
+         如果，写到spring的xml中，bean就会被spring容器管理，springmvc就会访问不到而出错。 -->
+	<context:component-scan base-package="com.bjsxt.controller"></context:component-scan>
+	
+	<!-- 注解驱动，这个注解驱动相当于让springmvc为我们生成HandlerMapping、HandlerAdapter。 -->
+	<!-- org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping -->
+	<!-- org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+	
+	<!-- 静态资源，放行 -->
+	<mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
+	<mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
+	<mvc:resources location="/images/" mapping="/images/**"></mvc:resources>
+	
+	<!-- springmvc的ViewResolver配置 -->
+	<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    	<property name="prefix" value="/"></property>
+    	<property name="suffix" value=".jsp"></property>
+    </bean> -->
+</beans>
